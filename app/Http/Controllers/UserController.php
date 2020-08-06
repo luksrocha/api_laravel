@@ -5,9 +5,29 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Validator;
-
+/**
+ * @group Users
+ * @authenticated
+ * 
+ * group for users
+ */
 class UserController extends Controller
 {
+    /**
+     * Route getUsers
+     * Route to get all users from DB. 
+     * 
+     * @response{
+     *  "id": 1,
+     * "name": "1",
+     * "email": "1",
+     * "email_verified_at": null,
+     * "type": "Admin",
+     * "created_at": "2020-08-06 14:34:10",
+     * "updated_at": "2020-08-06 14:34:10"
+     * }
+     * 
+     */
     public function getUsers(Request $request)
     {
         $users = User::get();

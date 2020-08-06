@@ -20,12 +20,12 @@ Route::post('/login', 'APILoginController@login');
 
 Route::middleware('auth:api')->get('/me', 'UserController@meProfile');
 
-Route::middleware('auth:api')->get('/users', 'UserController@getUsers');
-
-Route::middleware('auth:api')->get('/users/{id}', 'UserController@show');
-
-Route::middleware('auth:api')->patch('/users/{id}','UserController@update');
-
+Route::group(['middleware' => 'auth:api','prefix'=>'/users'],function(){
+    Route::middleware('auth:api')->get('', 'UserController@getUsers');
+    Route::middleware('auth:api')->get('{id}', 'UserController@show');
+    Route::middleware('auth:api')->patch('{id}','UserController@update');
+    });
+    
 Route::middleware('auth:api')->post('/todos','TodoController@store');
 
 Route::middleware('auth:api')->get('/todos','TodoController@index');
@@ -35,3 +35,11 @@ Route::middleware('auth:api')->get('/todos/{id}','TodoController@show');
 Route::middleware('auth:api')->patch('/todos/{id}','TodoController@update');
 
 Route::middleware('auth:api')->delete('/todos/{id}','TodoController@destroy');
+
+Route::middleware('auth:api')->post('/role','RolesController@createRole');
+
+Route::middleware('auth:api')->post('/permission','RolesController@createPermission');
+
+Route::middleware('auth:api')->post('/add-permission','RolesController@addPermission');
+
+Route::middleware('auth:api')->delete('/remove-permission','RolesController@removePermission');

@@ -14,3 +14,11 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('/doc', function(){
+    return view('apidoc.index');
+});
+
+Route::get('/apidoc',function(){
+    return "";
+})->name('apidoc.json');

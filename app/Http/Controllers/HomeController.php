@@ -8,13 +8,19 @@ use Validator;
 
 class HomeController extends Controller
 {
-
+/**
+ * Route register
+ * Route to register a new user
+ * 
+ * @bodyParam name string required name to register a user. Example:
+ */
     public function register(Request $request)
     {
         $validator = Validator::make($request->all(), [
             'name' => 'required|max:255',
             'email' => 'required',
             'password' => 'required|confirmed',
+            'type' => 'required'
         ]);
 
         if ($validator->fails()) {
@@ -24,6 +30,7 @@ class HomeController extends Controller
                 'name' => $request->name,
                 'email' => $request->email,
                 'password' => bcrypt($request->password),
+                'type' => $request->type,
             ]);
 
             if ($created) {
