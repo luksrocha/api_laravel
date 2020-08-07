@@ -5,11 +5,17 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Todo;
 use Validator;
+use App\Models\Role;
 
 class TodoController extends Controller
 {
     public function index(Request $request){
-        $todos = Todo::where('id_user',auth()->user()->id)->get();
+        $user = auth()->user();
+        if($user->hasRole('Admin')){
+            $todos = Todo::get();
+        }else{
+            $todos = Todo::where('id_user',auth()->user()->id)->get();
+        }
         return response($todos);
     }
 

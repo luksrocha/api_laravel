@@ -36,10 +36,4 @@ Route::middleware('auth:api')->patch('/todos/{id}','TodoController@update');
 
 Route::middleware('auth:api')->delete('/todos/{id}','TodoController@destroy');
 
-Route::middleware('auth:api')->post('/role','RolesController@createRole');
-
-Route::middleware('auth:api')->post('/permission','RolesController@createPermission');
-
-Route::middleware('auth:api')->post('/add-permission','RolesController@addPermission');
-
-Route::middleware('auth:api')->delete('/remove-permission','RolesController@removePermission');
+Route::post('/role','RolesController@createRole');
